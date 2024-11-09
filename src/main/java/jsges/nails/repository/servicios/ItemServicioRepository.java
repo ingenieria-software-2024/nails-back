@@ -9,14 +9,12 @@ import org.springframework.data.repository.query.Param;
 import jsges.nails.domain.servicios.ItemServicio;
 
 public interface ItemServicioRepository extends JpaRepository<ItemServicio, Integer> {
-  @Query("select p from ItemServicio p  where p.estado=0 ")
+  @Query("SELECT p FROM ItemServicio p WHERE p.estado = 0")
   List<ItemServicio> buscarNoEliminados();
 
-  @Query("SELECT p FROM ItemServicio p WHERE p.estado = 0 ")
+  @Query("SELECT p FROM ItemServicio p WHERE p.estado = 0")
   List<ItemServicio> buscarExacto();
 
-  @Query(
-    "SELECT p FROM ItemServicio p WHERE p.estado = 0 AND p.servicio.id = :idServicio"
-  )
+  @Query("SELECT p FROM ItemServicio p WHERE p.estado = 0 AND p.servicio.id = :idServicio")
   List<ItemServicio> buscarPorServicio(@Param("idServicio") Integer idServicio);
 }
