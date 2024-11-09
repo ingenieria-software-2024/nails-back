@@ -1,10 +1,12 @@
 package jsges.nails.domain.articulos;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jsges.nails.DTO.articulos.LineaDTO;
 import jsges.nails.domain.TipoObjeto;
 import lombok.Data;
 import lombok.ToString;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,6 +23,9 @@ public class Linea extends TipoObjeto {
 
   //@Column(columnDefinition = "TEXT")
   //String observacion;
+
+  @OneToMany(mappedBy = "linea")
+  private List<ArticuloVenta> articulosVenta;
 
   public Linea() {
     // Constructor por defecto necesario para JPA

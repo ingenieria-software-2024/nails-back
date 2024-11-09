@@ -34,6 +34,9 @@ public class ArticuloVenta {
   @ManyToOne(cascade = CascadeType.ALL)
   private Linea linea;
 
+  @ManyToOne
+  private Cliente cliente;
+
   public void asEliminado() {
     this.setEstado(1);
   }
