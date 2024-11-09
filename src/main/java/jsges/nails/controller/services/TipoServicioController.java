@@ -46,7 +46,7 @@ public class TipoServicioController {
   public ResponseEntity<Page<TipoServicio>> getItems(
     @RequestParam(defaultValue = "") String consulta,
     @RequestParam(defaultValue = "0") int page,
-    @RequestParam(defaultValue = "${max_page}") int size
+    @RequestParam(defaultValue = "${page.max}") int size
   ) {
     List<TipoServicio> listado = modelService.listar(consulta);
     Page<TipoServicio> bookPage = modelService.findPaginated(

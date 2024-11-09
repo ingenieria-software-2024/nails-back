@@ -80,7 +80,7 @@ public class ServicioController {
   public ResponseEntity<Page<ServicioDTO>> getItems(
     @RequestParam(defaultValue = "") String consulta,
     @RequestParam(defaultValue = "0") int page,
-    @RequestParam(defaultValue = "${max_page}") int size
+    @RequestParam(defaultValue = "${page.max}") int size
   ) {
     List<Servicio> listado = modelService.listar(consulta);
     List<ServicioDTO> listadoDTO = new ArrayList<>();

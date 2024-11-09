@@ -49,7 +49,7 @@ public class ClienteControlador {
   public ResponseEntity<Page<ClienteDTO>> getItems(
     @RequestParam(defaultValue = "") String consulta,
     @RequestParam(defaultValue = "0") int page,
-    @RequestParam(defaultValue = "${max_page}") int size
+    @RequestParam(defaultValue = "${page.max}") int size
   ) {
     List<Cliente> listado = clienteServicio.listar(consulta);
     List<ClienteDTO> listadoDTO = new ArrayList<>();

@@ -56,7 +56,7 @@ public class ArticuloVentaController {
   public ResponseEntity<Page<ArticuloVentaDTO>> getItems(
     @RequestParam(defaultValue = "") String consulta,
     @RequestParam(defaultValue = "0") int page,
-    @RequestParam(defaultValue = "${max_page}") int size
+    @RequestParam(defaultValue = "${page.max}") int size
   ) {
     List<ArticuloVenta> listado = modelService.listar(consulta);
     List<ArticuloVentaDTO> listadoDTO = new ArrayList<>();

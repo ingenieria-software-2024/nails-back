@@ -50,7 +50,7 @@ public class LineaController {
   public ResponseEntity<Page<LineaDTO>> getItems(
     @RequestParam(defaultValue = "") String consulta,
     @RequestParam(defaultValue = "0") int page,
-    @RequestParam(defaultValue = "${max_page}") int size
+    @RequestParam(defaultValue = "${page.max}") int size
   ) {
     List<LineaDTO> listadoDTO = new ArrayList<>();
     List<Linea> listado = modelService.listar(consulta);
