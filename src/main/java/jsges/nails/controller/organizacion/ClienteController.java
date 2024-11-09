@@ -36,6 +36,10 @@ public class ClienteController {
 
   public ClienteController() {}
 
+  /**
+   * Obtiene todos los clientes
+   * @return lista de clientes
+   */
   @GetMapping("/clientes")
   public List<ClienteDTO> getAll() {
     List<ClienteDTO> listadoDTO = new ArrayList<>();
@@ -47,6 +51,14 @@ public class ClienteController {
     return listadoDTO;
   }
 
+  /**
+   * Obtiene todos los clientes paginados
+   * @param consulta // consulta para filtrar
+   * @param page // pagina
+   * @param size // tamaño de la pagina
+   * 
+   * @return lista de clientes paginados
+   */
   @GetMapping("/clientesPageQuery")
   public ResponseEntity<Page<ClienteDTO>> getItems(
     @RequestParam(defaultValue = "") String consulta,
@@ -65,12 +77,24 @@ public class ClienteController {
     return ResponseEntity.ok().body(bookPage);
   }
 
+  /**
+   * Agrega un cliente
+   * @param cliente // cliente a agregar
+   * 
+   * @return cliente agregado
+   */
   @PostMapping("/clientes")
   public Cliente agregar(@RequestBody Cliente cliente) {
     // logger.info("Cliente a agregar: " + cliente);
     return clienteServicio.guardar(cliente);
   }
 
+  /**
+   * Elimina un cliente
+   * @param id // id del cliente a eliminar
+   * 
+   * @return cliente eliminado
+   */
   @PutMapping("/clientes/{id}")
   public ResponseEntity<Cliente> eliminar(@PathVariable Integer id) {
     Cliente model = clienteServicio.buscarPorId(id);
@@ -84,6 +108,12 @@ public class ClienteController {
     return ResponseEntity.ok(model);
   }
 
+  /**
+   * Obtiene un cliente por id
+   * @param id // id del cliente
+   * 
+   * @return cliente
+   */
   @GetMapping("/clientes/{id}")
   public ResponseEntity<Cliente> getPorId(@PathVariable Integer id) {
     Cliente cliente = clienteServicio.buscarPorId(id);
@@ -93,6 +123,13 @@ public class ClienteController {
     return ResponseEntity.ok(cliente);
   }
 
+  /**
+   * Actualiza un cliente
+   * @param id // id del cliente
+   * @param modelRecibido // cliente a actualizar
+   * 
+   * @return cliente actualizado
+   */
   @PutMapping("/clientes/{id}")
   public ResponseEntity<Cliente> actualizar(
     @PathVariable Integer id,
