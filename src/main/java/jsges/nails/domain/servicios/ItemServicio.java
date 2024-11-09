@@ -23,7 +23,6 @@ public class ItemServicio {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-
   int estado;
 
   @Column(columnDefinition = "TEXT")

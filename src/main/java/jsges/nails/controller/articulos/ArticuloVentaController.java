@@ -56,7 +56,7 @@ public class ArticuloVentaController {
     return listadoDTO;
   }
 
-  @GetMapping({ "/articulos" })
+  @GetMapping("/articulos")
   public List<ArticuloVentaDTO> getAll() {
     // Obtener la lista de articulos.
     List<ArticuloVenta> list = modelService.listar();
@@ -64,7 +64,7 @@ public class ArticuloVentaController {
     return convertArticuloVentaToDto(list);
   }
 
-  @GetMapping({ "/articulosPageQuery" })
+  @GetMapping("/articulosPageQuery")
   public ResponseEntity<Page<ArticuloVentaDTO>> getItems(
       @RequestParam(defaultValue = "") String consulta,
       @RequestParam(defaultValue = "0") int page,

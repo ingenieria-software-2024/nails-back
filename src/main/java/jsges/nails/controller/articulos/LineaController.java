@@ -2,10 +2,7 @@ package jsges.nails.controller.articulos;
 
 import java.util.ArrayList;
 import java.util.List;
-import jsges.nails.DTO.articulos.LineaDTO;
-import jsges.nails.domain.articulos.Linea;
-import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
-import jsges.nails.service.articulos.ILineaService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jsges.nails.DTO.articulos.LineaDTO;
+import jsges.nails.domain.articulos.Linea;
+import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
+import jsges.nails.service.articulos.ILineaService;
+
 @RestController
 @RequestMapping(value = "${path.mapping}")
 @CrossOrigin(value = "${path.cors}")
@@ -35,7 +37,7 @@ public class LineaController {
 
   public LineaController() {}
 
-  @GetMapping({ "/lineas" })
+  @GetMapping("/lineas")
   public List<Linea> getAll() {
     logger.info("enta en  traer todas las lineas");
     List<LineaDTO> listadoDTO = new ArrayList<>();
@@ -46,7 +48,7 @@ public class LineaController {
     return list;
   }
 
-  @GetMapping({ "/lineasPageQuery" })
+  @GetMapping("/lineasPageQuery")
   public ResponseEntity<Page<LineaDTO>> getItems(
     @RequestParam(defaultValue = "") String consulta,
     @RequestParam(defaultValue = "0") int page,

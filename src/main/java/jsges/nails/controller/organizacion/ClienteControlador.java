@@ -2,10 +2,7 @@ package jsges.nails.controller.organizacion;
 
 import java.util.ArrayList;
 import java.util.List;
-import jsges.nails.DTO.Organizacion.ClienteDTO;
-import jsges.nails.domain.organizacion.Cliente;
-import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
-import jsges.nails.service.organizacion.IClienteService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jsges.nails.DTO.Organizacion.ClienteDTO;
+import jsges.nails.domain.organizacion.Cliente;
+import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
+import jsges.nails.service.organizacion.IClienteService;
+
 @RestController
 @RequestMapping(value = "${path.mapping}")
 @CrossOrigin(value = "${path.cors}")
@@ -34,7 +36,7 @@ public class ClienteControlador {
 
   public ClienteControlador() {}
 
-  @GetMapping({ "/clientes" })
+  @GetMapping("/clientes")
   public List<ClienteDTO> getAll() {
     List<ClienteDTO> listadoDTO = new ArrayList<>();
     List<Cliente> list = this.clienteServicio.listar();
@@ -45,7 +47,7 @@ public class ClienteControlador {
     return listadoDTO;
   }
 
-  @GetMapping({ "/clientesPageQuery" })
+  @GetMapping("/clientesPageQuery")
   public ResponseEntity<Page<ClienteDTO>> getItems(
     @RequestParam(defaultValue = "") String consulta,
     @RequestParam(defaultValue = "0") int page,

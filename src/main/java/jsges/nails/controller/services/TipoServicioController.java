@@ -1,10 +1,7 @@
 package jsges.nails.controller.services;
 
 import java.util.List;
-import jsges.nails.DTO.servicios.TipoServicioDTO;
-import jsges.nails.domain.servicios.TipoServicio;
-import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
-import jsges.nails.service.servicios.ITipoServicioService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,37 +19,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jsges.nails.DTO.servicios.TipoServicioDTO;
+import jsges.nails.domain.servicios.TipoServicio;
+import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
+import jsges.nails.service.servicios.ITipoServicioService;
+
 @RestController
 @RequestMapping(value = "${path.mapping}")
 @CrossOrigin(value = "${path.cors}")
 public class TipoServicioController {
 
   private static final Logger logger = LoggerFactory.getLogger(
-    TipoServicioController.class
-  );
+      TipoServicioController.class);
 
   @Autowired
   private ITipoServicioService modelService;
 
-  public TipoServicioController() {}
+  public TipoServicioController() {
+  }
 
-  @GetMapping({ "/tiposervicios" })
+  @GetMapping("/tiposervicios")
   public List<TipoServicio> getAll() {
     List<TipoServicio> tipoServicios = this.modelService.listar();
     return tipoServicios;
   }
 
-  @GetMapping({ "/tiposerviciosPageQuery" })
+  @GetMapping("/tiposerviciosPageQuery")
   public ResponseEntity<Page<TipoServicio>> getItems(
-    @RequestParam(defaultValue = "") String consulta,
-    @RequestParam(defaultValue = "0") int page,
-    @RequestParam(defaultValue = "${page.max}") int size
-  ) {
+      @RequestParam(defaultValue = "") String consulta,
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "${page.max}") int size) {
     List<TipoServicio> listado = modelService.listar(consulta);
     Page<TipoServicio> bookPage = modelService.findPaginated(
-      PageRequest.of(page, size),
-      listado
-    );
+        PageRequest.of(page, size),
+        listado);
     return ResponseEntity.ok().body(bookPage);
   }
 
@@ -61,7 +61,8 @@ public class TipoServicioController {
     List<TipoServicio> list = modelService.buscar(model.denominacion);
     if (!list.isEmpty()) {
       return ResponseEntity.status(HttpStatus.CONFLICT).build();
-      // throw new RecursoNoEncontradoExcepcion("Ya existe una linea con la denominacion: " + model.denominacion);
+      // throw new RecursoNoEncontradoExcepcion("Ya existe una linea con la
+      // denominacion: " + model.denominacion);
     }
 
     TipoServicio nuevoModelo = modelService.newModel(model);
@@ -71,9 +72,9 @@ public class TipoServicioController {
   @PutMapping("/tiposervicios/{id}")
   public ResponseEntity<TipoServicio> eliminar(@PathVariable Integer id) {
     TipoServicio model = modelService.buscarPorId(id);
-    if (model == null) throw new RecursoNoEncontradoExcepcion(
-      "El id recibido no existe: " + id
-    );
+    if (model == null)
+      throw new RecursoNoEncontradoExcepcion(
+          "El id recibido no existe: " + id);
 
     model.setEstado(1);
 
@@ -84,21 +85,20 @@ public class TipoServicioController {
   @GetMapping("/tiposervicios/{id}")
   public ResponseEntity<TipoServicio> getPorId(@PathVariable Integer id) {
     TipoServicio cliente = modelService.buscarPorId(id);
-    if (cliente == null) throw new RecursoNoEncontradoExcepcion(
-      "No se encontro el id: " + id
-    );
+    if (cliente == null)
+      throw new RecursoNoEncontradoExcepcion(
+          "No se encontro el id: " + id);
     return ResponseEntity.ok(cliente);
   }
 
   @PutMapping("/tiposervicios/{id}")
   public ResponseEntity<TipoServicio> actualizar(
-    @PathVariable Integer id,
-    @RequestBody TipoServicio modelRecibido
-  ) {
+      @PathVariable Integer id,
+      @RequestBody TipoServicio modelRecibido) {
     TipoServicio model = modelService.buscarPorId(id);
-    if (model == null) throw new RecursoNoEncontradoExcepcion(
-      "El id recibido no existe: " + id
-    );
+    if (model == null)
+      throw new RecursoNoEncontradoExcepcion(
+          "El id recibido no existe: " + id);
 
     modelService.guardar(modelRecibido);
     return ResponseEntity.ok(modelRecibido);
