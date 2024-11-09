@@ -64,9 +64,9 @@ public class ServicioController {
   public ResponseEntity<ServicioDTO> getPorId(@PathVariable Integer id) {
     logger.info("entra  en buscar servicio");
     Servicio model = modelService.buscarPorId(id);
-    if (model == null) throw new RecursoNoEncontradoExcepcion(
-      "No se encontro el id: " + id
-    );
+    if (model == null)
+      throw new RecursoNoEncontradoExcepcion(
+          "No se encontro el id: " + id);
 
     List<ItemServicio> listItems = itemServicioService.buscarPorServicio(model.getId());
     ServicioDTO modelDTO = new ServicioDTO(model, listItems);
@@ -76,40 +76,37 @@ public class ServicioController {
 
   @GetMapping("/serviciosPageQuery")
   public ResponseEntity<Page<ServicioDTO>> getItems(
-    @RequestParam(defaultValue = "") String consulta,
-    @RequestParam(defaultValue = "0") int page,
-    @RequestParam(defaultValue = "${page.max}") int size
-  ) {
+      @RequestParam(defaultValue = "") String consulta,
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "${page.max}") int size) {
     List<Servicio> listado = modelService.listar(consulta);
     List<ServicioDTO> listadoDTO = new ArrayList<>();
     listado.forEach(model -> {
       listadoDTO.add(new ServicioDTO(model));
     });
     Page<ServicioDTO> bookPage = modelService.findPaginated(
-      PageRequest.of(page, size),
-      listadoDTO
-    );
+        PageRequest.of(page, size),
+        listadoDTO);
     return ResponseEntity.ok().body(bookPage);
   }
 
   @PostMapping("/servicios")
   public Servicio agregar(@RequestBody ServicioDTO model) {
-    Integer idCliente = model.cliente;
+    Integer idCliente = model.getCliente();
 
     Servicio newModel = new Servicio();
     newModel.setCliente(clienteService.buscarPorId(idCliente));
-    newModel.setFechaRegistro(model.fechaDocumento);
-    newModel.setFechaRealizacion(model.fechaDocumento);
+    newModel.setFechaRegistro(model.getFechaDocumento());
+    newModel.setFechaRealizacion(model.getFechaDocumento());
     newModel.setEstado(0);
 
     Servicio servicioGuardado = modelService.guardar(newModel);
-    for (ItemServicioDTO elemento : model.listaItems) {
+    for (ItemServicioDTO elemento : model.getListaItems()) {
       double precio = elemento.getPrecio();
       logger.info("entra for");
 
       TipoServicio tipoServicio = tipoServicioService.buscarPorId(
-        elemento.getTipoServicioId()
-      );
+          elemento.getTipoServicioId());
       String observacion = elemento.getObservaciones();
       ItemServicio item = new ItemServicio(newModel, tipoServicio, precio, observacion);
 
