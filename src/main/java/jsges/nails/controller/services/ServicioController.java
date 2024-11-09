@@ -2,7 +2,16 @@ package jsges.nails.controller.services;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import jsges.nails.DTO.servicios.ItemServicioDTO;
+import jsges.nails.DTO.servicios.ServicioDTO;
+import jsges.nails.domain.servicios.ItemServicio;
+import jsges.nails.domain.servicios.Servicio;
+import jsges.nails.domain.servicios.TipoServicio;
+import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
+import jsges.nails.service.organizacion.IClienteService;
+import jsges.nails.service.servicios.IItemServicioService;
+import jsges.nails.service.servicios.IServicioService;
+import jsges.nails.service.servicios.ITipoServicioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +26,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import jsges.nails.DTO.servicios.ItemServicioDTO;
-import jsges.nails.DTO.servicios.ServicioDTO;
-import jsges.nails.domain.servicios.ItemServicio;
-import jsges.nails.domain.servicios.Servicio;
-import jsges.nails.domain.servicios.TipoServicio;
-import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
-import jsges.nails.service.organizacion.IClienteService;
-import jsges.nails.service.servicios.IItemServicioService;
-import jsges.nails.service.servicios.IServicioService;
-import jsges.nails.service.servicios.ITipoServicioService;
 
 @RestController
 @RequestMapping(value = "${path.mapping}")
@@ -47,8 +45,6 @@ public class ServicioController {
 
   @Autowired
   private IItemServicioService itemServicioService;
-
-  public ServicioController() {}
 
   @GetMapping("/servicios")
   public List<ServicioDTO> getAll() {

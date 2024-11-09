@@ -2,7 +2,10 @@ package jsges.nails.controller.organizacion;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import jsges.nails.DTO.Organizacion.ClienteDTO;
+import jsges.nails.domain.organizacion.Cliente;
+import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
+import jsges.nails.service.organizacion.IClienteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jsges.nails.DTO.Organizacion.ClienteDTO;
-import jsges.nails.domain.organizacion.Cliente;
-import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
-import jsges.nails.service.organizacion.IClienteService;
-
 @RestController
 @RequestMapping(value = "${path.mapping}")
 @CrossOrigin(value = "${path.cors}")
@@ -33,8 +31,6 @@ public class ClienteController {
 
   @Autowired
   private IClienteService clienteServicio;
-
-  public ClienteController() {}
 
   /**
    * Obtiene todos los clientes
@@ -56,7 +52,7 @@ public class ClienteController {
    * @param consulta // consulta para filtrar
    * @param page // pagina
    * @param size // tamaño de la pagina
-   * 
+   *
    * @return lista de clientes paginados
    */
   @GetMapping("/clientesPageQuery")
@@ -80,7 +76,7 @@ public class ClienteController {
   /**
    * Agrega un cliente
    * @param cliente // cliente a agregar
-   * 
+   *
    * @return cliente agregado
    */
   @PostMapping("/clientes")
@@ -92,7 +88,7 @@ public class ClienteController {
   /**
    * Elimina un cliente
    * @param id // id del cliente a eliminar
-   * 
+   *
    * @return cliente eliminado
    */
   @PutMapping("/clientes/{id}")
@@ -111,7 +107,7 @@ public class ClienteController {
   /**
    * Obtiene un cliente por id
    * @param id // id del cliente
-   * 
+   *
    * @return cliente
    */
   @GetMapping("/clientes/{id}")
@@ -127,7 +123,7 @@ public class ClienteController {
    * Actualiza un cliente
    * @param id // id del cliente
    * @param modelRecibido // cliente a actualizar
-   * 
+   *
    * @return cliente actualizado
    */
   @PutMapping("/clientes/{id}")

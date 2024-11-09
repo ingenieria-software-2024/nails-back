@@ -1,12 +1,10 @@
 package jsges.nails.service.articulos;
 
 import java.util.List;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 import jsges.nails.DTO.articulos.ArticuloVentaDTO;
 import jsges.nails.domain.articulos.ArticuloVenta;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface IArticuloVentaService {
   /**
@@ -67,5 +65,8 @@ public interface IArticuloVentaService {
    *
    * @return Una pagina de ArticuloVentaDTO.
    */
-  public Page<ArticuloVentaDTO> findPaginated(Pageable pageable, List<ArticuloVentaDTO> list);
+  public Page<ArticuloVentaDTO> findPaginated(
+    Pageable pageable,
+    List<ArticuloVentaDTO> list
+  );
 }

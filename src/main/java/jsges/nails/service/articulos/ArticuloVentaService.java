@@ -2,7 +2,9 @@ package jsges.nails.service.articulos;
 
 import java.util.Collections;
 import java.util.List;
-
+import jsges.nails.DTO.articulos.ArticuloVentaDTO;
+import jsges.nails.domain.articulos.ArticuloVenta;
+import jsges.nails.repository.articulos.ArticuloVentaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import jsges.nails.DTO.articulos.ArticuloVentaDTO;
-import jsges.nails.domain.articulos.ArticuloVenta;
-import jsges.nails.repository.articulos.ArticuloVentaRepository;
-
 @Service
 public class ArticuloVentaService implements IArticuloVentaService {
 
@@ -23,7 +21,8 @@ public class ArticuloVentaService implements IArticuloVentaService {
   private ArticuloVentaRepository modelRepository;
 
   private static final Logger logger = LoggerFactory.getLogger(
-      ArticuloVentaService.class);
+    ArticuloVentaService.class
+  );
 
   @Override
   public List<ArticuloVenta> listar() {
@@ -58,8 +57,9 @@ public class ArticuloVentaService implements IArticuloVentaService {
 
   @Override
   public Page<ArticuloVentaDTO> findPaginated(
-      Pageable pageable,
-      List<ArticuloVentaDTO> listado) {
+    Pageable pageable,
+    List<ArticuloVentaDTO> listado
+  ) {
     int pageSize = pageable.getPageSize();
     int currentPage = pageable.getPageNumber();
     int startItem = currentPage * pageSize;
@@ -72,9 +72,10 @@ public class ArticuloVentaService implements IArticuloVentaService {
     }
 
     Page<ArticuloVentaDTO> bookPage = new PageImpl<ArticuloVentaDTO>(
-        list,
-        PageRequest.of(currentPage, pageSize),
-        listado.size());
+      list,
+      PageRequest.of(currentPage, pageSize),
+      listado.size()
+    );
 
     return bookPage;
   }

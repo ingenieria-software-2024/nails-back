@@ -1,12 +1,10 @@
 package jsges.nails.service.servicios;
 
 import java.util.List;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 import jsges.nails.DTO.servicios.TipoServicioDTO;
 import jsges.nails.domain.servicios.TipoServicio;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ITipoServicioService {
   /**
@@ -67,7 +65,10 @@ public interface ITipoServicioService {
    *
    * @return Una pagina de tipos de servicio.
    */
-  public Page<TipoServicio> findPaginated(Pageable pageable, List<TipoServicio> tipoServicios);
+  public Page<TipoServicio> findPaginated(
+    Pageable pageable,
+    List<TipoServicio> tipoServicios
+  );
 
   /**
    * Busca tipos de servicio que coinciden con la consulta dada.

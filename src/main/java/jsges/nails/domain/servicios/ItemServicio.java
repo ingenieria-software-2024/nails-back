@@ -1,7 +1,5 @@
 package jsges.nails.domain.servicios;
 
-import java.util.Objects;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
@@ -23,6 +22,7 @@ public class ItemServicio {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
+
   int estado;
 
   @Column(columnDefinition = "TEXT")

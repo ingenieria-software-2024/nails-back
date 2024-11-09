@@ -1,11 +1,9 @@
 package jsges.nails.service.servicios;
 
 import java.util.List;
-
+import jsges.nails.domain.servicios.ItemServicio;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import jsges.nails.domain.servicios.ItemServicio;
 
 public interface IItemServicioService {
   /**
@@ -41,7 +39,10 @@ public interface IItemServicioService {
    *
    * @return Una pagina de items de servicio.
    */
-  public Page<ItemServicio> findPaginated(Pageable pageable, List<ItemServicio> servicios);
+  public Page<ItemServicio> findPaginated(
+    Pageable pageable,
+    List<ItemServicio> servicios
+  );
 
   /**
    * Obtiene una pagina de items de servicio.

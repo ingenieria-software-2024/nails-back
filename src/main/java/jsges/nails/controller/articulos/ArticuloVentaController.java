@@ -3,7 +3,13 @@ package jsges.nails.controller.articulos;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+import jsges.nails.DTO.articulos.ArticuloVentaDTO;
+import jsges.nails.controller.mapper.ArticuloVentaMapper;
+import jsges.nails.domain.articulos.ArticuloVenta;
+import jsges.nails.domain.articulos.Linea;
+import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
+import jsges.nails.service.articulos.IArticuloVentaService;
+import jsges.nails.service.articulos.ILineaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,30 +27,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jsges.nails.DTO.articulos.ArticuloVentaDTO;
-import jsges.nails.controller.mapper.ArticuloVentaMapper;
-import jsges.nails.domain.articulos.ArticuloVenta;
-import jsges.nails.domain.articulos.Linea;
-import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
-import jsges.nails.service.articulos.IArticuloVentaService;
-import jsges.nails.service.articulos.ILineaService;
-
 @RestController
 @RequestMapping(value = "${path.mapping}")
 @CrossOrigin(value = "${path.cors}")
 public class ArticuloVentaController {
 
   private static final Logger logger = LoggerFactory.getLogger(
-      ArticuloVentaController.class);
+    ArticuloVentaController.class
+  );
 
   @Autowired
   private IArticuloVentaService modelService;
 
   @Autowired
   private ILineaService lineaService;
-
-  public ArticuloVentaController() {
-  }
 
   private List<ArticuloVentaDTO> convertArticuloVentaToDto(List<ArticuloVenta> list) {
     List<ArticuloVentaDTO> listadoDTO = new ArrayList<>();
@@ -66,9 +62,10 @@ public class ArticuloVentaController {
 
   @GetMapping("/articulosPageQuery")
   public ResponseEntity<Page<ArticuloVentaDTO>> getItems(
-      @RequestParam(defaultValue = "") String consulta,
-      @RequestParam(defaultValue = "0") int page,
-      @RequestParam(defaultValue = "${page.max}") int size) {
+    @RequestParam(defaultValue = "") String consulta,
+    @RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "${page.max}") int size
+  ) {
     // Obtener el listado.
     List<ArticuloVenta> listado = modelService.listar(consulta);
 
@@ -77,8 +74,9 @@ public class ArticuloVentaController {
 
     // Crear una pagina del listado en base a los parametros.
     Page<ArticuloVentaDTO> bookPage = modelService.findPaginated(
-        PageRequest.of(page, size),
-        listadoDTO);
+      PageRequest.of(page, size),
+      listadoDTO
+    );
 
     // Retornar la pagina.
     return ResponseEntity.ok().body(bookPage);
@@ -98,8 +96,9 @@ public class ArticuloVentaController {
     // Buscar la linea por ID primero.
     Linea linea = lineaService.buscarPorId(idLinea);
 
-    if (!Optional.ofNullable(linea).isPresent())
-      throw new RecursoNoEncontradoExcepcion("No se encontro la linea con el id: " + idLinea);
+    if (!Optional.ofNullable(linea).isPresent()) throw new RecursoNoEncontradoExcepcion(
+      "No se encontro la linea con el id: " + idLinea
+    );
 
     // Establecer la linea del modelo.
     newModel.setLinea(lineaService.buscarPorId(idLinea));
@@ -113,8 +112,9 @@ public class ArticuloVentaController {
   public ResponseEntity<ArticuloVenta> eliminar(@PathVariable Integer id) {
     ArticuloVenta model = modelService.buscarPorId(id);
 
-    if (model == null)
-      throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
+    if (model == null) throw new RecursoNoEncontradoExcepcion(
+      "El id recibido no existe: " + id
+    );
 
     model.asEliminado();
     modelService.guardar(model);
@@ -125,8 +125,9 @@ public class ArticuloVentaController {
   public ResponseEntity<ArticuloVentaDTO> getPorId(@PathVariable Integer id) {
     ArticuloVenta articuloVenta = modelService.buscarPorId(id);
 
-    if (articuloVenta == null)
-      throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
+    if (articuloVenta == null) throw new RecursoNoEncontradoExcepcion(
+      "No se encontro el id: " + id
+    );
 
     ArticuloVentaDTO model = new ArticuloVentaDTO(articuloVenta);
     return ResponseEntity.ok(model);
@@ -134,16 +135,18 @@ public class ArticuloVentaController {
 
   @PutMapping("/articulos/{id}")
   public ResponseEntity<ArticuloVenta> actualizar(
-      @PathVariable Integer id,
-      @RequestBody ArticuloVentaDTO modelRecibido) {
+    @PathVariable Integer id,
+    @RequestBody ArticuloVentaDTO modelRecibido
+  ) {
     logger.info("articulo " + modelRecibido);
 
     ArticuloVenta model = modelService.buscarPorId(id);
 
     logger.info("articulo " + model);
 
-    if (model == null)
-      throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
+    if (model == null) throw new RecursoNoEncontradoExcepcion(
+      "El id recibido no existe: " + id
+    );
 
     logger.info("articulo " + model);
 

@@ -2,7 +2,9 @@ package jsges.nails.service.servicios;
 
 import java.util.Collections;
 import java.util.List;
-
+import jsges.nails.DTO.servicios.TipoServicioDTO;
+import jsges.nails.domain.servicios.TipoServicio;
+import jsges.nails.repository.servicios.TipoServicioRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import jsges.nails.DTO.servicios.TipoServicioDTO;
-import jsges.nails.domain.servicios.TipoServicio;
-import jsges.nails.repository.servicios.TipoServicioRepository;
 
 @Service
 public class TipoServicioService implements ITipoServicioService {

@@ -1,28 +1,30 @@
 package jsges.nails.domain.articulos;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import java.util.List;
 import jsges.nails.DTO.articulos.LineaDTO;
 import jsges.nails.domain.TipoObjeto;
 import lombok.Data;
 import lombok.ToString;
-import java.util.List;
 
 @Entity
 @Data
 @ToString
 public class Linea extends TipoObjeto {
 
-  //@Id
-  //@GeneratedValue(strategy = GenerationType.IDENTITY)
-  //private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-  //@Column(columnDefinition = "TEXT")
-  //String denominacion;
-  //int estado;
+  String denominacion;
 
-  //@Column(columnDefinition = "TEXT")
-  //String observacion;
+  int estado;
+
+  String observacion;
 
   @OneToMany(mappedBy = "linea")
   private List<ArticuloVenta> articulosVenta;

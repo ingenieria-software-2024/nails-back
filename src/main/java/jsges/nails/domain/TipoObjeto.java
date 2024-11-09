@@ -1,8 +1,5 @@
 package jsges.nails.domain;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.SequenceGenerator;
+import java.io.Serializable;
+import java.util.Objects;
 import lombok.Data;
 
 @Entity
