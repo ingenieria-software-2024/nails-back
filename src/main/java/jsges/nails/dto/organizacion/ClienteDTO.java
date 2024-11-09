@@ -1,4 +1,4 @@
-package jsges.nails.dto.Organizacion;
+package jsges.nails.dto.organizacion;
 
 import java.util.Date;
 import jsges.nails.domain.organizacion.Cliente;

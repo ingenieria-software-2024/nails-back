@@ -10,8 +10,8 @@ import jsges.nails.domain.organizacion.Cliente;
 import jsges.nails.domain.servicios.ItemServicio;
 import jsges.nails.domain.servicios.Servicio;
 import jsges.nails.domain.servicios.TipoServicio;
-import jsges.nails.dto.Organizacion.ClienteDTO;
 import jsges.nails.dto.articulos.LineaDTO;
+import jsges.nails.dto.organizacion.ClienteDTO;
 import jsges.nails.dto.servicios.ItemServicioDTO;
 
 @SpringBootTest

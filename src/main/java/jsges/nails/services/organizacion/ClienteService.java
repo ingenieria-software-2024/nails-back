@@ -3,7 +3,7 @@ package jsges.nails.services.organizacion;
 import java.util.Collections;
 import java.util.List;
 import jsges.nails.domain.organizacion.Cliente;
-import jsges.nails.dto.Organizacion.ClienteDTO;
+import jsges.nails.dto.organizacion.ClienteDTO;
 import jsges.nails.repositories.organizacion.ClienteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

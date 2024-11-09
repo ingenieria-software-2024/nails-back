@@ -1,7 +1,7 @@
 package jsges.nails.controller.mapper;
 
 import jsges.nails.domain.organizacion.Cliente;
-import jsges.nails.dto.Organizacion.ClienteDTO;
+import jsges.nails.dto.organizacion.ClienteDTO;
 
 public class ClienteMapper {
 
