@@ -2,10 +2,10 @@ package jsges.nails.controller.organizacion;
 
 import java.util.ArrayList;
 import java.util.List;
-import jsges.nails.DTO.Organizacion.ClienteDTO;
 import jsges.nails.domain.organizacion.Cliente;
-import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
-import jsges.nails.service.organizacion.IClienteService;
+import jsges.nails.dto.Organizacion.ClienteDTO;
+import jsges.nails.exception.RecursoNoEncontradoExcepcion;
+import jsges.nails.services.organizacion.IClienteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

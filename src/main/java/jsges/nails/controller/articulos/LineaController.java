@@ -2,10 +2,10 @@ package jsges.nails.controller.articulos;
 
 import java.util.ArrayList;
 import java.util.List;
-import jsges.nails.DTO.articulos.LineaDTO;
 import jsges.nails.domain.articulos.Linea;
-import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
-import jsges.nails.service.articulos.ILineaService;
+import jsges.nails.dto.articulos.LineaDTO;
+import jsges.nails.exception.RecursoNoEncontradoExcepcion;
+import jsges.nails.services.articulos.ILineaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

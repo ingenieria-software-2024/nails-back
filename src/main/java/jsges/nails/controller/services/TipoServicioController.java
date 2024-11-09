@@ -1,10 +1,10 @@
 package jsges.nails.controller.services;
 
 import java.util.List;
-import jsges.nails.DTO.servicios.TipoServicioDTO;
 import jsges.nails.domain.servicios.TipoServicio;
-import jsges.nails.excepcion.RecursoNoEncontradoExcepcion;
-import jsges.nails.service.servicios.ITipoServicioService;
+import jsges.nails.dto.servicios.TipoServicioDTO;
+import jsges.nails.exception.RecursoNoEncontradoExcepcion;
+import jsges.nails.services.servicios.interfaces.ITipoServicioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -24,12 +24,10 @@ public class ArticuloVenta {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @Column(columnDefinition = "TEXT")
   String denominacion;
 
   int estado;
 
-  @Column(columnDefinition = "TEXT")
   String observacion;
 
   @ManyToOne(cascade = CascadeType.ALL)

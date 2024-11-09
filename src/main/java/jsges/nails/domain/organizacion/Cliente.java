@@ -27,21 +27,16 @@ public class Cliente implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @Column(columnDefinition = "TEXT")
   String razonSocial;
 
   int estado;
 
-  @Column(columnDefinition = "TEXT")
   String letra;
 
-  @Column(columnDefinition = "TEXT")
   String contacto;
 
-  @Column(columnDefinition = "TEXT")
   String celular;
 
-  @Column(columnDefinition = "TEXT")
   String mail;
 
   @OneToMany(mappedBy = "cliente")

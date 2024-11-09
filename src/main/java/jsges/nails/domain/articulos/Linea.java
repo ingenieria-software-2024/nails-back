@@ -6,8 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.util.List;
-import jsges.nails.DTO.articulos.LineaDTO;
 import jsges.nails.domain.TipoObjeto;
+import jsges.nails.dto.articulos.LineaDTO;
 import lombok.Data;
 import lombok.ToString;
 
@@ -29,9 +29,7 @@ public class Linea extends TipoObjeto {
   @OneToMany(mappedBy = "linea")
   private List<ArticuloVenta> articulosVenta;
 
-  public Linea() {
-    // Constructor por defecto necesario para JPA
-  }
+  public Linea() {}
 
   public Linea(String nombre) {
     this.setDenominacion(nombre);
