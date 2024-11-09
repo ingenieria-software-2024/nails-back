@@ -4,8 +4,7 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import jsges.nails.DTO.Organizacion.ClienteDTO;
-import jsges.nails.domain.organizacion.Cliente;
+
 import jsges.nails.domain.servicios.ItemServicio;
 import jsges.nails.domain.servicios.Servicio;
 

@@ -2,9 +2,7 @@ package jsges.nails.service.articulos;
 
 import java.util.Collections;
 import java.util.List;
-import jsges.nails.DTO.articulos.LineaDTO;
-import jsges.nails.domain.articulos.Linea;
-import jsges.nails.repository.articulos.LineaRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,10 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import jsges.nails.DTO.articulos.LineaDTO;
+import jsges.nails.domain.articulos.Linea;
+import jsges.nails.repository.articulos.LineaRepository;
 
 @Service
 public class LineaService implements ILineaService {

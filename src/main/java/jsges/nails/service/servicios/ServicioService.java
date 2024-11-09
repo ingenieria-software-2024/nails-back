@@ -2,12 +2,7 @@ package jsges.nails.service.servicios;
 
 import java.util.Collections;
 import java.util.List;
-import jsges.nails.DTO.articulos.ArticuloVentaDTO;
-import jsges.nails.DTO.servicios.ServicioDTO;
-import jsges.nails.domain.articulos.ArticuloVenta;
-import jsges.nails.domain.servicios.ItemServicio;
-import jsges.nails.domain.servicios.Servicio;
-import jsges.nails.repository.servicios.ServicioRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +11,10 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import jsges.nails.DTO.servicios.ServicioDTO;
+import jsges.nails.domain.servicios.Servicio;
+import jsges.nails.repository.servicios.ServicioRepository;
 
 @Service
 public class ServicioService implements IServicioService {

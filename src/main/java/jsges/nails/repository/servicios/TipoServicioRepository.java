@@ -1,10 +1,12 @@
 package jsges.nails.repository.servicios;
 
 import java.util.List;
-import jsges.nails.domain.servicios.TipoServicio;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import jsges.nails.domain.servicios.TipoServicio;
 
 public interface TipoServicioRepository extends JpaRepository<TipoServicio, Integer> {
   @Query("select p from TipoServicio p  where p.estado=0 order by p.denominacion")

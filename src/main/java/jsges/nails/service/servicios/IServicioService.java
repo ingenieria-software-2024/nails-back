@@ -1,14 +1,12 @@
 package jsges.nails.service.servicios;
 
 import java.util.List;
-import jsges.nails.DTO.servicios.ServicioDTO;
-import jsges.nails.DTO.servicios.TipoServicioDTO;
-import jsges.nails.domain.articulos.ArticuloVenta;
-import jsges.nails.domain.servicios.ItemServicio;
-import jsges.nails.domain.servicios.Servicio;
-import jsges.nails.domain.servicios.TipoServicio;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import jsges.nails.DTO.servicios.ServicioDTO;
+import jsges.nails.domain.servicios.Servicio;
 
 public interface IServicioService {
   public List<Servicio> listar();

@@ -1,11 +1,12 @@
 package jsges.nails.service.articulos;
 
 import java.util.List;
-import jsges.nails.DTO.articulos.LineaDTO;
-import jsges.nails.domain.articulos.ArticuloVenta;
-import jsges.nails.domain.articulos.Linea;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import jsges.nails.DTO.articulos.LineaDTO;
+import jsges.nails.domain.articulos.Linea;
 
 public interface ILineaService {
   public List<Linea> listar();

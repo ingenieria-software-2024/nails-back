@@ -1,10 +1,8 @@
 package jsges.nails.domain.servicios;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 import jsges.nails.domain.TipoObjeto;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity

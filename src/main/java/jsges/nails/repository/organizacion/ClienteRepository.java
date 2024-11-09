@@ -1,10 +1,12 @@
 package jsges.nails.repository.organizacion;
 
 import java.util.List;
-import jsges.nails.domain.organizacion.Cliente;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import jsges.nails.domain.organizacion.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
   @Query("select p from Cliente p  where p.estado=0 order by p.razonSocial")
