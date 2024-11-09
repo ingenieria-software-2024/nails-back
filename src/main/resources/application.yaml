@@ -13,7 +13,7 @@ spring:
     banner-mode: off
 
 path:
-  cors: http://localhost:3000
+  cors: "*"
   mapping: nails
 
 page:

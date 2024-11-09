@@ -33,7 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticuloVentaController {
 
   private static final Logger logger = LoggerFactory.getLogger(
-      ArticuloVentaController.class);
+    ArticuloVentaController.class
+  );
 
   @Autowired
   private IArticuloVentaService modelService;
@@ -61,9 +62,10 @@ public class ArticuloVentaController {
 
   @GetMapping("/articulosPageQuery")
   public ResponseEntity<Page<ArticuloVentaDTO>> getItems(
-      @RequestParam(defaultValue = "") String consulta,
-      @RequestParam(defaultValue = "0") int page,
-      @RequestParam(defaultValue = "${page.max}") int size) {
+    @RequestParam(defaultValue = "") String consulta,
+    @RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "${page.max}") int size
+  ) {
     // Obtener el listado.
     List<ArticuloVenta> listado = modelService.listar(consulta);
 
@@ -72,8 +74,9 @@ public class ArticuloVentaController {
 
     // Crear una pagina del listado en base a los parametros.
     Page<ArticuloVentaDTO> bookPage = modelService.findPaginated(
-        PageRequest.of(page, size),
-        listadoDTO);
+      PageRequest.of(page, size),
+      listadoDTO
+    );
 
     // Retornar la pagina.
     return ResponseEntity.ok().body(bookPage);
@@ -91,9 +94,9 @@ public class ArticuloVentaController {
     // Buscar la linea por ID primero.
     Linea linea = lineaService.buscarPorId(idLinea);
 
-    if (!Optional.ofNullable(linea).isPresent())
-      throw new RecursoNoEncontradoExcepcion(
-          "No se encontro el articulo de venta especificado.");
+    if (!Optional.ofNullable(linea).isPresent()) throw new RecursoNoEncontradoExcepcion(
+      "No se encontro el articulo de venta especificado."
+    );
 
     // Establecer la linea del modelo.
     newModel.setLinea(lineaService.buscarPorId(idLinea));
@@ -107,9 +110,9 @@ public class ArticuloVentaController {
   public ResponseEntity<ArticuloVentaDTO> eliminar(@PathVariable Integer id) {
     ArticuloVenta model = modelService.buscarPorId(id);
 
-    if (model == null)
-      throw new RecursoNoEncontradoExcepcion(
-          "No se encontro el articulo de venta especificado.");
+    if (model == null) throw new RecursoNoEncontradoExcepcion(
+      "No se encontro el articulo de venta especificado."
+    );
 
     model.asEliminado();
     modelService.guardar(model);
@@ -121,9 +124,9 @@ public class ArticuloVentaController {
   public ResponseEntity<ArticuloVentaDTO> getPorId(@PathVariable Integer id) {
     ArticuloVenta articuloVenta = modelService.buscarPorId(id);
 
-    if (articuloVenta == null)
-      throw new RecursoNoEncontradoExcepcion(
-          "No se encontro el articulo de venta especificado.");
+    if (articuloVenta == null) throw new RecursoNoEncontradoExcepcion(
+      "No se encontro el articulo de venta especificado."
+    );
 
     ArticuloVentaDTO model = new ArticuloVentaDTO(articuloVenta);
     return ResponseEntity.ok(model);
@@ -131,13 +134,14 @@ public class ArticuloVentaController {
 
   @PutMapping("/articulos/{id}")
   public ResponseEntity<ArticuloVentaDTO> actualizar(
-      @PathVariable Integer id,
-      @RequestBody ArticuloVentaDTO modelRecibido) {
+    @PathVariable Integer id,
+    @RequestBody ArticuloVentaDTO modelRecibido
+  ) {
     ArticuloVenta model = modelService.buscarPorId(id);
 
-    if (model == null)
-      throw new RecursoNoEncontradoExcepcion(
-          "No se encontro el articulo de venta especificado.");
+    if (model == null) throw new RecursoNoEncontradoExcepcion(
+      "No se encontro el articulo de venta especificado."
+    );
 
     model.setDenominacion(modelRecibido.denominacion);
     model.setLinea(lineaService.buscarPorId(modelRecibido.linea));

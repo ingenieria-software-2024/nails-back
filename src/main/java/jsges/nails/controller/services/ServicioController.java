@@ -68,9 +68,9 @@ public class ServicioController {
   public ResponseEntity<ServicioDTO> getPorId(@PathVariable Integer id) {
     Servicio model = modelService.buscarPorId(id);
 
-    if (model == null)
-      throw new RecursoNoEncontradoExcepcion(
-          "No se encontro el servicio especificado");
+    if (model == null) throw new RecursoNoEncontradoExcepcion(
+      "No se encontro el servicio especificado"
+    );
 
     List<ItemServicio> listItems = itemServicioService.buscarPorServicio(model.getId());
     ServicioDTO modelDTO = new ServicioDTO(model, listItems);
@@ -80,16 +80,18 @@ public class ServicioController {
 
   @GetMapping("/serviciosPageQuery")
   public ResponseEntity<Page<ServicioDTO>> getItems(
-      @RequestParam(defaultValue = "") String consulta,
-      @RequestParam(defaultValue = "0") int page,
-      @RequestParam(defaultValue = "${page.max}") int size) {
+    @RequestParam(defaultValue = "") String consulta,
+    @RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "${page.max}") int size
+  ) {
     List<Servicio> listado = modelService.listar(consulta);
     List<ServicioDTO> listadoDTO = convertServicioToDto(listado);
 
     // Crear una pagina con el listado correspondiente.
     Page<ServicioDTO> bookPage = modelService.findPaginated(
-        PageRequest.of(page, size),
-        listadoDTO);
+      PageRequest.of(page, size),
+      listadoDTO
+    );
 
     // Retornar la pagina completa.
     return ResponseEntity.ok().body(bookPage);
@@ -113,7 +115,8 @@ public class ServicioController {
       double precio = elemento.getPrecio();
 
       TipoServicio tipoServicio = tipoServicioService.buscarPorId(
-          elemento.getTipoServicioId());
+        elemento.getTipoServicioId()
+      );
       String observacion = elemento.getObservaciones();
       ItemServicio item = new ItemServicio(newModel, tipoServicio, precio, observacion);
 

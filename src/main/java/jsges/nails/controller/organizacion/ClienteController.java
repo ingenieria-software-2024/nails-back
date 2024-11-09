@@ -2,7 +2,6 @@ package jsges.nails.controller.organizacion;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import jsges.nails.controller.mapper.ClienteMapper;
 import jsges.nails.domain.organizacion.Cliente;
 import jsges.nails.dto.organizacion.ClienteDTO;
@@ -68,15 +67,17 @@ public class ClienteController {
    */
   @GetMapping("/clientesPageQuery")
   public ResponseEntity<Page<ClienteDTO>> getItems(
-      @RequestParam(defaultValue = "") String consulta,
-      @RequestParam(defaultValue = "0") int page,
-      @RequestParam(defaultValue = "${page.max}") int size) {
+    @RequestParam(defaultValue = "") String consulta,
+    @RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "${page.max}") int size
+  ) {
     List<ClienteDTO> listadoDTO = convertClienteToDto(clienteServicio.listar(consulta));
 
     // Crear una pagina con el listado correspondiente.
     Page<ClienteDTO> bookPage = clienteServicio.findPaginated(
-        PageRequest.of(page, size),
-        listadoDTO);
+      PageRequest.of(page, size),
+      listadoDTO
+    );
 
     // Retornar la pagina completa.
     return ResponseEntity.ok().body(bookPage);
@@ -107,9 +108,9 @@ public class ClienteController {
   @DeleteMapping("/clientes/{id}")
   public ResponseEntity<ClienteDTO> eliminar(@PathVariable Integer id) {
     Cliente model = clienteServicio.buscarPorId(id);
-    if (model == null)
-      throw new RecursoNoEncontradoExcepcion(
-          "El cliente especificado no existe.");
+    if (model == null) throw new RecursoNoEncontradoExcepcion(
+      "El cliente especificado no existe."
+    );
 
     model.setEstado(1);
 
@@ -128,9 +129,9 @@ public class ClienteController {
   public ResponseEntity<ClienteDTO> getPorId(@PathVariable Integer id) {
     Cliente cliente = clienteServicio.buscarPorId(id);
 
-    if (cliente == null)
-      throw new RecursoNoEncontradoExcepcion(
-          "El cliente especificado no existe.");
+    if (cliente == null) throw new RecursoNoEncontradoExcepcion(
+      "El cliente especificado no existe."
+    );
 
     return ResponseEntity.ok(new ClienteDTO(cliente));
   }
@@ -145,12 +146,13 @@ public class ClienteController {
    */
   @PutMapping("/clientes/{id}")
   public ResponseEntity<ClienteDTO> actualizar(
-      @PathVariable Integer id,
-      @RequestBody Cliente modelRecibido) {
+    @PathVariable Integer id,
+    @RequestBody Cliente modelRecibido
+  ) {
     Cliente model = clienteServicio.buscarPorId(id);
-    if (model == null)
-      throw new RecursoNoEncontradoExcepcion(
-          "El cliente especificado no existe.");
+    if (model == null) throw new RecursoNoEncontradoExcepcion(
+      "El cliente especificado no existe."
+    );
 
     clienteServicio.guardar(modelRecibido);
     return ResponseEntity.ok(new ClienteDTO(modelRecibido));

@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import jsges.nails.domain.servicios.ItemServicio;
 import jsges.nails.domain.servicios.Servicio;
 import lombok.Data;
@@ -19,8 +18,7 @@ public class ServicioDTO {
   private Double total;
   private String clienteRazonSocial;
 
-  public ServicioDTO() {
-  }
+  public ServicioDTO() {}
 
   public ServicioDTO(Servicio elemento, List<ItemServicio> list) {
     this.id = elemento.getId();

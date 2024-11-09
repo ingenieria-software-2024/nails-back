@@ -3,7 +3,6 @@ package jsges.nails.services.organizacion;
 import java.util.List;
 import jsges.nails.domain.organizacion.Cliente;
 import jsges.nails.dto.organizacion.ClienteDTO;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

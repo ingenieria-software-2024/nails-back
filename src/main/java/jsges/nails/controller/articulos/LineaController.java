@@ -2,10 +2,7 @@ package jsges.nails.controller.articulos;
 
 import java.util.ArrayList;
 import java.util.List;
-import jsges.nails.domain.articulos.Linea;
-import jsges.nails.dto.articulos.LineaDTO;
-import jsges.nails.exception.RecursoNoEncontradoExcepcion;
-import jsges.nails.services.articulos.ILineaService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +20,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import jsges.nails.domain.articulos.Linea;
+import jsges.nails.dto.articulos.LineaDTO;
+import jsges.nails.exception.RecursoNoEncontradoExcepcion;
+import jsges.nails.services.articulos.ILineaService;
 
 @RestController
 @RequestMapping(value = "${path.mapping}")
@@ -83,7 +85,8 @@ public class LineaController {
     Linea model = modelService.buscarPorId(id);
 
     if (model == null)
-      throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
+      throw new RecursoNoEncontradoExcepcion(
+          "La linea especificada no existe.");
 
     model.asEliminado();
     modelService.guardar(model);
@@ -96,7 +99,8 @@ public class LineaController {
     Linea linea = modelService.buscarPorId(id);
 
     if (linea == null)
-      throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
+      throw new RecursoNoEncontradoExcepcion(
+          "La linea especificada no existe.");
 
     LineaDTO model = new LineaDTO(linea);
     return ResponseEntity.ok(model);
@@ -109,7 +113,8 @@ public class LineaController {
     Linea model = modelService.buscarPorId(modelRecibido.id);
 
     if (model == null)
-      throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
+      throw new RecursoNoEncontradoExcepcion(
+          "La linea especificada no existe.");
 
     model.setDenominacion(modelRecibido.denominacion);
     modelService.guardar(model);

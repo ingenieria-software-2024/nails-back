@@ -5,24 +5,24 @@ import jsges.nails.dto.organizacion.ClienteDTO;
 
 public class ClienteMapper {
 
-    public ClienteMapper() {
-        super();
-    }
+  public ClienteMapper() {
+    super();
+  }
 
-    public static ClienteDTO toClienteDTO(Cliente cliente) {
-        return new ClienteDTO(cliente);
-    }
+  public static ClienteDTO toClienteDTO(Cliente cliente) {
+    return new ClienteDTO(cliente);
+  }
 
-    public static Cliente toCliente(ClienteDTO clienteDTO) {
-        Cliente cliente = new Cliente();
-        cliente.setId(clienteDTO.getId());
-        cliente.setRazonSocial(clienteDTO.getRazonSocial());
-        cliente.setLetra(clienteDTO.getLetra());
-        cliente.setContacto(clienteDTO.getContacto());
-        cliente.setCelular(clienteDTO.getCelular());
-        cliente.setMail(clienteDTO.getMail());
-        cliente.setFechaInicio(clienteDTO.getFechaInicio());
-        cliente.setFechaNacimiento(clienteDTO.getFechaNacimiento());
-        return cliente;
-    }
+  public static Cliente toCliente(ClienteDTO clienteDTO) {
+    Cliente cliente = new Cliente();
+    cliente.setId(clienteDTO.getId());
+    cliente.setRazonSocial(clienteDTO.getRazonSocial());
+    cliente.setLetra(clienteDTO.getLetra());
+    cliente.setContacto(clienteDTO.getContacto());
+    cliente.setCelular(clienteDTO.getCelular());
+    cliente.setMail(clienteDTO.getMail());
+    cliente.setFechaInicio(clienteDTO.getFechaInicio());
+    cliente.setFechaNacimiento(clienteDTO.getFechaNacimiento());
+    return cliente;
+  }
 }
