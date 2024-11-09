@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import jsges.nails.domain.articulos.ArticuloVenta;
+import jsges.nails.domain.servicios.Servicio;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
