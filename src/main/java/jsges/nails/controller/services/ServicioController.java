@@ -62,7 +62,7 @@ public class ServicioController {
     return lista;
   }
 
-  @GetMapping("/servicio/{id}")
+  @GetMapping("/servicios/{id}")
   public ResponseEntity<ServicioDTO> getPorId(@PathVariable Integer id) {
     logger.info("entra  en buscar servicio");
     Servicio model = modelService.buscarPorId(id);

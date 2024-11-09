@@ -109,7 +109,7 @@ public class ArticuloVentaController {
     return modelSave;
   }
 
-  @DeleteMapping("/articuloEliminar/{id}")
+  @DeleteMapping("/articulos/{id}")
   public ResponseEntity<ArticuloVenta> eliminar(@PathVariable Integer id) {
     ArticuloVenta model = modelService.buscarPorId(id);
 

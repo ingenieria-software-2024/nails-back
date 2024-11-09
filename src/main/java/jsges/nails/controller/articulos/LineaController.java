@@ -65,7 +65,7 @@ public class LineaController {
     return ResponseEntity.ok().body(bookPage);
   }
 
-  @PostMapping("/linea")
+  @PostMapping("/lineas")
   public ResponseEntity<Linea> agregar(@RequestBody LineaDTO model) {
     List<Linea> list = modelService.buscar(model.denominacion);
     if (!list.isEmpty()) {
@@ -75,7 +75,7 @@ public class LineaController {
     return ResponseEntity.ok(nuevaLinea);
   }
 
-  @PutMapping("/lineaEliminar/{id}")
+  @PutMapping("/lineas/{id}")
   public ResponseEntity<Linea> eliminar(@PathVariable Integer id) {
     Linea model = modelService.buscarPorId(id);
     if (model == null) {
@@ -87,7 +87,7 @@ public class LineaController {
     return ResponseEntity.ok(model);
   }
 
-  @GetMapping("/linea/{id}")
+  @GetMapping("/lineas/{id}")
   public ResponseEntity<LineaDTO> getPorId(@PathVariable Integer id) {
     Linea linea = modelService.buscarPorId(id);
     if (linea == null) {
@@ -97,7 +97,7 @@ public class LineaController {
     return ResponseEntity.ok(model);
   }
 
-  @PutMapping("/linea/{id}")
+  @PutMapping("/lineas/{id}")
   public ResponseEntity<Linea> actualizar(
     @PathVariable Integer id,
     @RequestBody LineaDTO modelRecibido

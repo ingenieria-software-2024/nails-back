@@ -36,13 +36,13 @@ public class TipoServicioController {
 
   public TipoServicioController() {}
 
-  @GetMapping({ "/tiposServicios" })
+  @GetMapping({ "/tiposervicios" })
   public List<TipoServicio> getAll() {
     List<TipoServicio> tipoServicios = this.modelService.listar();
     return tipoServicios;
   }
 
-  @GetMapping({ "/tiposServiciosPageQuery" })
+  @GetMapping({ "/tiposerviciosPageQuery" })
   public ResponseEntity<Page<TipoServicio>> getItems(
     @RequestParam(defaultValue = "") String consulta,
     @RequestParam(defaultValue = "0") int page,
@@ -56,7 +56,7 @@ public class TipoServicioController {
     return ResponseEntity.ok().body(bookPage);
   }
 
-  @PostMapping("/tiposServicios")
+  @PostMapping("/tiposervicios")
   public ResponseEntity<TipoServicio> agregar(@RequestBody TipoServicioDTO model) {
     List<TipoServicio> list = modelService.buscar(model.denominacion);
     if (!list.isEmpty()) {
@@ -68,7 +68,7 @@ public class TipoServicioController {
     return ResponseEntity.ok(nuevoModelo);
   }
 
-  @PutMapping("/tipoServicioEliminar/{id}")
+  @PutMapping("/tiposervicios/{id}")
   public ResponseEntity<TipoServicio> eliminar(@PathVariable Integer id) {
     TipoServicio model = modelService.buscarPorId(id);
     if (model == null) throw new RecursoNoEncontradoExcepcion(
@@ -81,7 +81,7 @@ public class TipoServicioController {
     return ResponseEntity.ok(model);
   }
 
-  @GetMapping("/tiposServicios/{id}")
+  @GetMapping("/tiposervicios/{id}")
   public ResponseEntity<TipoServicio> getPorId(@PathVariable Integer id) {
     TipoServicio cliente = modelService.buscarPorId(id);
     if (cliente == null) throw new RecursoNoEncontradoExcepcion(
@@ -90,7 +90,7 @@ public class TipoServicioController {
     return ResponseEntity.ok(cliente);
   }
 
-  @PutMapping("/tiposServicios/{id}")
+  @PutMapping("/tiposervicios/{id}")
   public ResponseEntity<TipoServicio> actualizar(
     @PathVariable Integer id,
     @RequestBody TipoServicio modelRecibido

@@ -69,7 +69,7 @@ public class ClienteControlador {
     return clienteServicio.guardar(cliente);
   }
 
-  @PutMapping("/clienteEliminar/{id}")
+  @PutMapping("/clientes/{id}")
   public ResponseEntity<Cliente> eliminar(@PathVariable Integer id) {
     Cliente model = clienteServicio.buscarPorId(id);
     if (model == null) throw new RecursoNoEncontradoExcepcion(
@@ -82,7 +82,7 @@ public class ClienteControlador {
     return ResponseEntity.ok(model);
   }
 
-  @GetMapping("/cliente/{id}")
+  @GetMapping("/clientes/{id}")
   public ResponseEntity<Cliente> getPorId(@PathVariable Integer id) {
     Cliente cliente = clienteServicio.buscarPorId(id);
     if (cliente == null) throw new RecursoNoEncontradoExcepcion(
