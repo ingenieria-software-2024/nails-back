@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +35,7 @@ public class ClienteController {
 
   /**
    * Obtiene todos los clientes
+   *
    * @return lista de clientes
    */
   @GetMapping("/clientes")
@@ -49,9 +51,10 @@ public class ClienteController {
 
   /**
    * Obtiene todos los clientes paginados
+   *
    * @param consulta // consulta para filtrar
-   * @param page // pagina
-   * @param size // tamaño de la pagina
+   * @param page     // pagina
+   * @param size     // tamaño de la pagina
    *
    * @return lista de clientes paginados
    */
@@ -75,6 +78,7 @@ public class ClienteController {
 
   /**
    * Agrega un cliente
+   *
    * @param cliente // cliente a agregar
    *
    * @return cliente agregado
@@ -87,11 +91,12 @@ public class ClienteController {
 
   /**
    * Elimina un cliente
+   *
    * @param id // id del cliente a eliminar
    *
    * @return cliente eliminado
    */
-  @PutMapping("/clientes/{id}")
+  @DeleteMapping("/clientes/{id}")
   public ResponseEntity<Cliente> eliminar(@PathVariable Integer id) {
     Cliente model = clienteServicio.buscarPorId(id);
     if (model == null) throw new RecursoNoEncontradoExcepcion(
@@ -106,6 +111,7 @@ public class ClienteController {
 
   /**
    * Obtiene un cliente por id
+   *
    * @param id // id del cliente
    *
    * @return cliente
@@ -121,7 +127,8 @@ public class ClienteController {
 
   /**
    * Actualiza un cliente
-   * @param id // id del cliente
+   *
+   * @param id            // id del cliente
    * @param modelRecibido // cliente a actualizar
    *
    * @return cliente actualizado
