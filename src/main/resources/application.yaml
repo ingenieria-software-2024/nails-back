@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/js_nails_db?createDatabaseIfNotExist=true
+    username: root
+    password: test1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    show-sql: true
+  main:
+    banner-mode: off
+
+path:
+  cors: http://localhost:3000
+  mapping: nails
+
+page:
+  max: 9

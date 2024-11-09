@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="${path_mapping}")
-@CrossOrigin(value="${path_cross}")
+@RequestMapping(value="${path.mapping}")
+@CrossOrigin(value="${path.cors}")
 public class TipoServicioController {
     private static final Logger logger = LoggerFactory.getLogger(TipoServicioController.class);
     @Autowired

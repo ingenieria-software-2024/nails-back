@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value="${path_mapping}")
-@CrossOrigin(value="${path_cross}")
+@RequestMapping(value="${path.mapping}")
+@CrossOrigin(value="${path.cors}")
 public class LineaController {
     private static final Logger logger = LoggerFactory.getLogger(LineaController.class);
     @Autowired

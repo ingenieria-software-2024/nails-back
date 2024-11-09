@@ -21,8 +21,8 @@ import java.util.List;
 import static java.lang.Integer.parseInt;
 
 @RestController
-@RequestMapping(value="${path_mapping}")
-@CrossOrigin(value="${path_cross}")
+@RequestMapping(value="${path.mapping}")
+@CrossOrigin(value="${path.cors}")
 public class ArticuloVentaController {
     private static final Logger logger = LoggerFactory.getLogger(ArticuloVentaController.class);
     @Autowired
