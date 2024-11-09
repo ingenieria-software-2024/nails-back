@@ -27,14 +27,14 @@ import jsges.nails.service.organizacion.IClienteService;
 @RestController
 @RequestMapping(value = "${path.mapping}")
 @CrossOrigin(value = "${path.cors}")
-public class ClienteControlador {
+public class ClienteController {
 
-  private static final Logger logger = LoggerFactory.getLogger(ClienteControlador.class);
+  private static final Logger logger = LoggerFactory.getLogger(ClienteController.class);
 
   @Autowired
   private IClienteService clienteServicio;
 
-  public ClienteControlador() {}
+  public ClienteController() {}
 
   @GetMapping("/clientes")
   public List<ClienteDTO> getAll() {
