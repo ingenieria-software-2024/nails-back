@@ -13,24 +13,22 @@ import lombok.ToString;
 @ToString
 public class ArticuloVenta {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;
+  @Column(columnDefinition = "TEXT")
+  String denominacion;
 
-        @Column(columnDefinition = "TEXT")
-        String denominacion;
-        int estado;
+  int estado;
 
-        @Column(columnDefinition = "TEXT")
-        String observacion;
+  @Column(columnDefinition = "TEXT")
+  String observacion;
 
-        @ManyToOne(cascade = CascadeType.ALL)
-        private Linea linea;
+  @ManyToOne(cascade = CascadeType.ALL)
+  private Linea linea;
 
-
-        public void asEliminado() {
-               this.setEstado(1);
-        }
+  public void asEliminado() {
+    this.setEstado(1);
+  }
 }
-

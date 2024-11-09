@@ -10,8 +10,4 @@ import lombok.ToString;
 @Entity
 @Data
 @ToString
-public class TipoServicio extends TipoObjeto {
-
-
-
-}
+public class TipoServicio extends TipoObjeto {}
