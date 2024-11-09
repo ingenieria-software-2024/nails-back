@@ -2,6 +2,8 @@ package jsges.nails.controller.organizacion;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jsges.nails.controller.mapper.ClienteMapper;
 import jsges.nails.domain.organizacion.Cliente;
 import jsges.nails.dto.Organizacion.ClienteDTO;
 import jsges.nails.exception.RecursoNoEncontradoExcepcion;
@@ -33,6 +35,16 @@ public class ClienteController {
   @Autowired
   private IClienteService clienteServicio;
 
+  private List<ClienteDTO> convertClienteToDto(List<Cliente> list) {
+    List<ClienteDTO> listadoDTO = new ArrayList<>();
+
+    for (Cliente model : list) {
+      listadoDTO.add(new ClienteDTO(model));
+    }
+
+    return listadoDTO;
+  }
+
   /**
    * Obtiene todos los clientes
    *
@@ -40,12 +52,8 @@ public class ClienteController {
    */
   @GetMapping("/clientes")
   public List<ClienteDTO> getAll() {
-    List<ClienteDTO> listadoDTO = new ArrayList<>();
-    List<Cliente> list = this.clienteServicio.listar();
+    List<ClienteDTO> listadoDTO = convertClienteToDto(clienteServicio.listar());
 
-    list.forEach(model -> {
-      listadoDTO.add(new ClienteDTO(model));
-    });
     return listadoDTO;
   }
 
@@ -60,33 +68,33 @@ public class ClienteController {
    */
   @GetMapping("/clientesPageQuery")
   public ResponseEntity<Page<ClienteDTO>> getItems(
-    @RequestParam(defaultValue = "") String consulta,
-    @RequestParam(defaultValue = "0") int page,
-    @RequestParam(defaultValue = "${page.max}") int size
-  ) {
-    List<Cliente> listado = clienteServicio.listar(consulta);
-    List<ClienteDTO> listadoDTO = new ArrayList<>();
-    listado.forEach(model -> {
-      listadoDTO.add(new ClienteDTO(model));
-    });
+      @RequestParam(defaultValue = "") String consulta,
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "${page.max}") int size) {
+    List<ClienteDTO> listadoDTO = convertClienteToDto(clienteServicio.listar(consulta));
+
+    // Crear una pagina con el listado correspondiente.
     Page<ClienteDTO> bookPage = clienteServicio.findPaginated(
-      PageRequest.of(page, size),
-      listadoDTO
-    );
+        PageRequest.of(page, size),
+        listadoDTO);
+
+    // Retornar la pagina completa.
     return ResponseEntity.ok().body(bookPage);
   }
 
   /**
-   * Agrega un cliente
+   * Agrega un cliente nuevo.
    *
    * @param cliente // cliente a agregar
    *
    * @return cliente agregado
    */
   @PostMapping("/clientes")
-  public Cliente agregar(@RequestBody Cliente cliente) {
-    // logger.info("Cliente a agregar: " + cliente);
-    return clienteServicio.guardar(cliente);
+  public ResponseEntity<ClienteDTO> agregar(@RequestBody ClienteDTO cliente) {
+    // Crear al nuevo cliente.
+    Cliente nuevoCliente = clienteServicio.guardar(ClienteMapper.toCliente(cliente));
+
+    return ResponseEntity.ok(new ClienteDTO(nuevoCliente));
   }
 
   /**
@@ -97,16 +105,16 @@ public class ClienteController {
    * @return cliente eliminado
    */
   @DeleteMapping("/clientes/{id}")
-  public ResponseEntity<Cliente> eliminar(@PathVariable Integer id) {
+  public ResponseEntity<ClienteDTO> eliminar(@PathVariable Integer id) {
     Cliente model = clienteServicio.buscarPorId(id);
-    if (model == null) throw new RecursoNoEncontradoExcepcion(
-      "El id recibido no existe: " + id
-    );
+    if (model == null)
+      throw new RecursoNoEncontradoExcepcion(
+          "El cliente especificado no existe.");
 
     model.setEstado(1);
 
     clienteServicio.guardar(model);
-    return ResponseEntity.ok(model);
+    return ResponseEntity.ok(new ClienteDTO(model));
   }
 
   /**
@@ -117,12 +125,14 @@ public class ClienteController {
    * @return cliente
    */
   @GetMapping("/clientes/{id}")
-  public ResponseEntity<Cliente> getPorId(@PathVariable Integer id) {
+  public ResponseEntity<ClienteDTO> getPorId(@PathVariable Integer id) {
     Cliente cliente = clienteServicio.buscarPorId(id);
-    if (cliente == null) throw new RecursoNoEncontradoExcepcion(
-      "No se encontro el id: " + id
-    );
-    return ResponseEntity.ok(cliente);
+
+    if (cliente == null)
+      throw new RecursoNoEncontradoExcepcion(
+          "El cliente especificado no existe.");
+
+    return ResponseEntity.ok(new ClienteDTO(cliente));
   }
 
   /**
@@ -134,16 +144,15 @@ public class ClienteController {
    * @return cliente actualizado
    */
   @PutMapping("/clientes/{id}")
-  public ResponseEntity<Cliente> actualizar(
-    @PathVariable Integer id,
-    @RequestBody Cliente modelRecibido
-  ) {
+  public ResponseEntity<ClienteDTO> actualizar(
+      @PathVariable Integer id,
+      @RequestBody Cliente modelRecibido) {
     Cliente model = clienteServicio.buscarPorId(id);
-    if (model == null) throw new RecursoNoEncontradoExcepcion(
-      "El id recibido no existe: " + id
-    );
+    if (model == null)
+      throw new RecursoNoEncontradoExcepcion(
+          "El cliente especificado no existe.");
 
     clienteServicio.guardar(modelRecibido);
-    return ResponseEntity.ok(modelRecibido);
+    return ResponseEntity.ok(new ClienteDTO(modelRecibido));
   }
 }

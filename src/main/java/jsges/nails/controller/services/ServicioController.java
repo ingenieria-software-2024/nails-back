@@ -46,31 +46,35 @@ public class ServicioController {
   @Autowired
   private IItemServicioService itemServicioService;
 
+  private List<ServicioDTO> convertServicioToDto(List<Servicio> list) {
+    List<ServicioDTO> listadoDTO = new ArrayList<>();
+
+    for (Servicio model : list) {
+      listadoDTO.add(new ServicioDTO(model));
+    }
+
+    return listadoDTO;
+  }
+
   @GetMapping("/servicios")
   public List<ServicioDTO> getAll() {
     List<Servicio> servicios = this.modelService.listar();
-    List<ServicioDTO> lista = new ArrayList<>();
-    for (Servicio elemento : servicios) {
-      System.out.println("1"); // Debug: Verificar el contenido
-      List<ItemServicio> items = itemServicioService.listar();
-      System.out.println("3"); // Debug: Verificar el contenido
-      ServicioDTO ser = new ServicioDTO(elemento, items);
-      lista.add(ser);
-    }
+    List<ServicioDTO> lista = convertServicioToDto(servicios);
+
     return lista;
   }
 
   @GetMapping("/servicios/{id}")
   public ResponseEntity<ServicioDTO> getPorId(@PathVariable Integer id) {
-    logger.info("entra  en buscar servicio");
     Servicio model = modelService.buscarPorId(id);
+
     if (model == null)
       throw new RecursoNoEncontradoExcepcion(
-          "No se encontro el id: " + id);
+          "No se encontro el servicio especificado");
 
     List<ItemServicio> listItems = itemServicioService.buscarPorServicio(model.getId());
     ServicioDTO modelDTO = new ServicioDTO(model, listItems);
-    logger.info(modelDTO.toString());
+
     return ResponseEntity.ok(modelDTO);
   }
 
@@ -80,30 +84,33 @@ public class ServicioController {
       @RequestParam(defaultValue = "0") int page,
       @RequestParam(defaultValue = "${page.max}") int size) {
     List<Servicio> listado = modelService.listar(consulta);
-    List<ServicioDTO> listadoDTO = new ArrayList<>();
-    listado.forEach(model -> {
-      listadoDTO.add(new ServicioDTO(model));
-    });
+    List<ServicioDTO> listadoDTO = convertServicioToDto(listado);
+
+    // Crear una pagina con el listado correspondiente.
     Page<ServicioDTO> bookPage = modelService.findPaginated(
         PageRequest.of(page, size),
         listadoDTO);
+
+    // Retornar la pagina completa.
     return ResponseEntity.ok().body(bookPage);
   }
 
   @PostMapping("/servicios")
-  public Servicio agregar(@RequestBody ServicioDTO model) {
+  public ServicioDTO agregar(@RequestBody ServicioDTO model) {
+    // Obtener el ID del cliente.
     Integer idCliente = model.getCliente();
 
+    // Crear un nuevo modelo.
     Servicio newModel = new Servicio();
     newModel.setCliente(clienteService.buscarPorId(idCliente));
     newModel.setFechaRegistro(model.getFechaDocumento());
     newModel.setFechaRealizacion(model.getFechaDocumento());
     newModel.setEstado(0);
 
+    // Guardar el nuevo modelo.
     Servicio servicioGuardado = modelService.guardar(newModel);
     for (ItemServicioDTO elemento : model.getListaItems()) {
       double precio = elemento.getPrecio();
-      logger.info("entra for");
 
       TipoServicio tipoServicio = tipoServicioService.buscarPorId(
           elemento.getTipoServicioId());
@@ -113,6 +120,6 @@ public class ServicioController {
       itemServicioService.guardar(item);
     }
 
-    return servicioGuardado;
+    return new ServicioDTO(servicioGuardado);
   }
 }

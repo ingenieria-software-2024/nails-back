@@ -34,79 +34,86 @@ public class LineaController {
   @Autowired
   private ILineaService modelService;
 
-  @GetMapping("/lineas")
-  public List<Linea> getAll() {
-    logger.info("enta en  traer todas las lineas");
+  private List<LineaDTO> convertLineaToDto(List<Linea> list) {
     List<LineaDTO> listadoDTO = new ArrayList<>();
-    List<Linea> list = modelService.listar();
-    list.forEach(model -> {
+
+    for (Linea model : list) {
       listadoDTO.add(new LineaDTO(model));
-    });
-    return list;
+    }
+
+    return listadoDTO;
+  }
+
+  @GetMapping("/lineas")
+  public List<LineaDTO> getAll() {
+    List<LineaDTO> listadoDTO = convertLineaToDto(modelService.listar());
+
+    return listadoDTO;
   }
 
   @GetMapping("/lineasPageQuery")
   public ResponseEntity<Page<LineaDTO>> getItems(
-    @RequestParam(defaultValue = "") String consulta,
-    @RequestParam(defaultValue = "0") int page,
-    @RequestParam(defaultValue = "${page.max}") int size
-  ) {
-    List<LineaDTO> listadoDTO = new ArrayList<>();
-    List<Linea> listado = modelService.listar(consulta);
-    listado.forEach(model -> {
-      listadoDTO.add(new LineaDTO(model));
-    });
+      @RequestParam(defaultValue = "") String consulta,
+      @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "${page.max}") int size) {
+    List<LineaDTO> listadoDTO = convertLineaToDto(modelService.listar(consulta));
 
+    // Crear una pagina con el listado correspondiente.
     Page<LineaDTO> bookPage = modelService.findPaginated(
-      PageRequest.of(page, size),
-      listadoDTO
-    );
+        PageRequest.of(page, size),
+        listadoDTO);
+
+    // Retornar la pagina completa.
     return ResponseEntity.ok().body(bookPage);
   }
 
   @PostMapping("/lineas")
-  public ResponseEntity<Linea> agregar(@RequestBody LineaDTO model) {
+  public ResponseEntity<LineaDTO> agregar(@RequestBody LineaDTO model) {
     List<Linea> list = modelService.buscar(model.denominacion);
-    if (!list.isEmpty()) {
+
+    if (!list.isEmpty())
       return ResponseEntity.status(HttpStatus.CONFLICT).build();
-    }
+
     Linea nuevaLinea = modelService.newModel(model);
-    return ResponseEntity.ok(nuevaLinea);
+    return ResponseEntity.ok(new LineaDTO(nuevaLinea));
   }
 
   @DeleteMapping("/lineas/{id}")
-  public ResponseEntity<Linea> eliminar(@PathVariable Integer id) {
+  public ResponseEntity<LineaDTO> eliminar(@PathVariable Integer id) {
     Linea model = modelService.buscarPorId(id);
-    if (model == null) {
+
+    if (model == null)
       throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-    }
 
     model.asEliminado();
     modelService.guardar(model);
-    return ResponseEntity.ok(model);
+
+    return ResponseEntity.ok(new LineaDTO(model));
   }
 
   @GetMapping("/lineas/{id}")
   public ResponseEntity<LineaDTO> getPorId(@PathVariable Integer id) {
     Linea linea = modelService.buscarPorId(id);
-    if (linea == null) {
+
+    if (linea == null)
       throw new RecursoNoEncontradoExcepcion("No se encontro el id: " + id);
-    }
+
     LineaDTO model = new LineaDTO(linea);
     return ResponseEntity.ok(model);
   }
 
   @PutMapping("/lineas/{id}")
-  public ResponseEntity<Linea> actualizar(
-    @PathVariable Integer id,
-    @RequestBody LineaDTO modelRecibido
-  ) {
+  public ResponseEntity<LineaDTO> actualizar(
+      @PathVariable Integer id,
+      @RequestBody LineaDTO modelRecibido) {
     Linea model = modelService.buscarPorId(modelRecibido.id);
-    if (model == null) {
+
+    if (model == null)
       throw new RecursoNoEncontradoExcepcion("El id recibido no existe: " + id);
-    }
+
     model.setDenominacion(modelRecibido.denominacion);
     modelService.guardar(model);
-    return ResponseEntity.ok(model);
+
+    return ResponseEntity.ok(new LineaDTO(model));
   }
 }
