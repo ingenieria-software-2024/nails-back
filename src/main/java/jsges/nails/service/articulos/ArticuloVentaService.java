@@ -23,8 +23,7 @@ public class ArticuloVentaService implements IArticuloVentaService {
   private ArticuloVentaRepository modelRepository;
 
   private static final Logger logger = LoggerFactory.getLogger(
-    ArticuloVentaService.class
-  );
+      ArticuloVentaService.class);
 
   @Override
   public List<ArticuloVenta> listar() {
@@ -59,9 +58,8 @@ public class ArticuloVentaService implements IArticuloVentaService {
 
   @Override
   public Page<ArticuloVentaDTO> findPaginated(
-    Pageable pageable,
-    List<ArticuloVentaDTO> listado
-  ) {
+      Pageable pageable,
+      List<ArticuloVentaDTO> listado) {
     int pageSize = pageable.getPageSize();
     int currentPage = pageable.getPageNumber();
     int startItem = currentPage * pageSize;
@@ -74,10 +72,9 @@ public class ArticuloVentaService implements IArticuloVentaService {
     }
 
     Page<ArticuloVentaDTO> bookPage = new PageImpl<ArticuloVentaDTO>(
-      list,
-      PageRequest.of(currentPage, pageSize),
-      listado.size()
-    );
+        list,
+        PageRequest.of(currentPage, pageSize),
+        listado.size());
 
     return bookPage;
   }
