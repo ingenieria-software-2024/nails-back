@@ -41,7 +41,7 @@ public class TipoServicioService implements ITipoServicioService {
   @Override
   public TipoServicio newModel(TipoServicioDTO modelDTO) {
     TipoServicio model = new TipoServicio();
-    model.setDenominacion(modelDTO.denominacion);
+    model.setDenominacion(modelDTO.getDenominacion());
     return guardar(model);
   }
 
@@ -52,7 +52,7 @@ public class TipoServicioService implements ITipoServicioService {
 
   @Override
   public List<TipoServicio> listar(String consulta) {
-    //logger.info("service " +consulta);
+    // logger.info("service " +consulta);
     return modelRepository.buscarNoEliminados(consulta);
   }
 
@@ -78,7 +78,7 @@ public class TipoServicioService implements ITipoServicioService {
       list = lineas.subList(startItem, toIndex);
     }
 
-    Page<TipoServicio> bookPage = new PageImpl<TipoServicio>(
+    Page<TipoServicio> bookPage = new PageImpl<>(
       list,
       PageRequest.of(currentPage, pageSize),
       lineas.size()

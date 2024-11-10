@@ -1,19 +1,20 @@
 package jsges.nails.dto.articulos;
 
 import jsges.nails.domain.articulos.ArticuloVenta;
-import jsges.nails.dto.TipoObjetoDTO;
+import lombok.Data;
 
-public class ArticuloVentaDTO extends TipoObjetoDTO {
+@Data
+public class ArticuloVentaDTO {
 
-  public Integer id;
-  public String denominacion;
-  public Integer linea;
+  private Integer id;
+  private String denominacion;
+  private Integer linea;
+
+  public ArticuloVentaDTO() {}
 
   public ArticuloVentaDTO(ArticuloVenta model) {
     this.id = model.getId();
     this.denominacion = model.getDenominacion();
     this.linea = model.getLinea().getId();
   }
-
-  public ArticuloVentaDTO() {}
 }

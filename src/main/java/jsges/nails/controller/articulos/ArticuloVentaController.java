@@ -85,11 +85,11 @@ public class ArticuloVentaController {
   @PostMapping("/articulos")
   public ResponseEntity<ArticuloVentaDTO> agregar(@RequestBody ArticuloVentaDTO model) {
     // Obtener el ID de la linea.
-    Integer idLinea = model.linea;
+    Integer idLinea = model.getLinea();
 
     // Crear un nuevo modelo.
     ArticuloVenta newModel = new ArticuloVenta();
-    newModel.setDenominacion(model.denominacion);
+    newModel.setDenominacion(model.getDenominacion());
 
     // Buscar la linea por ID primero.
     Linea linea = lineaService.buscarPorId(idLinea);
@@ -143,8 +143,8 @@ public class ArticuloVentaController {
       "No se encontro el articulo de venta especificado."
     );
 
-    model.setDenominacion(modelRecibido.denominacion);
-    model.setLinea(lineaService.buscarPorId(modelRecibido.linea));
+    model.setDenominacion(modelRecibido.getDenominacion());
+    model.setLinea(lineaService.buscarPorId(modelRecibido.getLinea()));
 
     modelService.guardar(model);
 

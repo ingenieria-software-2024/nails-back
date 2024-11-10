@@ -57,7 +57,7 @@ public class TipoServicioController {
 
   @PostMapping("/tiposervicios")
   public ResponseEntity<TipoServicio> agregar(@RequestBody TipoServicioDTO model) {
-    List<TipoServicio> list = modelService.buscar(model.denominacion);
+    List<TipoServicio> list = modelService.buscar(model.getDenominacion());
     if (!list.isEmpty()) {
       return ResponseEntity.status(HttpStatus.CONFLICT).build();
       // throw new RecursoNoEncontradoExcepcion("Ya existe una linea con la

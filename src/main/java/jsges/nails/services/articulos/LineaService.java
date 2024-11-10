@@ -38,8 +38,9 @@ public class LineaService implements ILineaService {
   }
 
   @Override
-  public Linea newModel(LineaDTO modelDTO) {
-    Linea model = new Linea(modelDTO);
+  public Linea newModelFromDto(LineaDTO modelDTO) {
+    Linea model = new Linea(modelDTO.getDenominacion());
+
     return guardar(model);
   }
 
@@ -50,7 +51,7 @@ public class LineaService implements ILineaService {
 
   @Override
   public List<Linea> listar(String consulta) {
-    //logger.info("service " +consulta);
+    // logger.info("service " +consulta);
     return modelRepository.buscarNoEliminados(consulta);
   }
 

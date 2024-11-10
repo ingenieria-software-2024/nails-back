@@ -5,6 +5,11 @@ import lombok.Data;
 @Data
 public class TipoObjetoDTO {
 
-  public Integer id;
-  public String denominacion;
+  private Integer id;
+  private String denominacion;
+
+  public TipoObjetoDTO(Integer id, String denominacion) {
+    this.id = id;
+    this.denominacion = denominacion;
+  }
 }

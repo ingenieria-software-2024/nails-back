@@ -83,5 +83,5 @@ public interface ILineaService {
    *
    * @return El nuevo Linea creado.
    */
-  public Linea newModel(LineaDTO model);
+  public Linea newModelFromDto(LineaDTO model);
 }

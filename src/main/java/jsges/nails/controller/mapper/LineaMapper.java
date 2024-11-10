@@ -15,8 +15,8 @@ public class LineaMapper {
 
   public static Linea toLinea(LineaDTO lineaDTO) {
     Linea linea = new Linea();
-    linea.setId(lineaDTO.id);
-    linea.setDenominacion(lineaDTO.denominacion);
+    linea.setId(lineaDTO.getId());
+    linea.setDenominacion(lineaDTO.getDenominacion());
     return linea;
   }
 }

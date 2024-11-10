@@ -15,8 +15,8 @@ public class ArticuloVentaMapper {
 
   public static ArticuloVenta toArticuloVenta(ArticuloVentaDTO articuloVentaDTO) {
     ArticuloVenta articuloVenta = new ArticuloVenta();
-    articuloVenta.setId(articuloVentaDTO.id);
-    articuloVenta.setDenominacion(articuloVentaDTO.denominacion);
+    articuloVenta.setId(articuloVentaDTO.getId());
+    articuloVenta.setDenominacion(articuloVentaDTO.getDenominacion());
     return articuloVenta;
   }
 }
